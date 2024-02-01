@@ -1,0 +1,35 @@
+API key: 'Enter API key'
+
+
+wget https://downloads.apache.org/kafka/3.4.1/kafka_2.12-3.4.1.tgz
+tar -xvf kafka_2.12-3.4.1.tgz
+
+sudo yum install java
+
+
+cd kafka_2.12-3.4.1
+
+bin/zookeeper-server-start.sh config/zookeeper.properties
+
+open new window
+
+export KAFKA_HEAP_OPTS="-Xmx256M -Xms128M"
+
+cd kafka_2.12-3.4.1
+
+bin/kafka-server-start.sh config/server.properties
+#change public IP address
+sudo nano config/server.properties
+
+bin/kafka-topics.sh --create --topic demotest --bootstrap-server 'instance_ID' --replication-factor 1 --partitions 1
+
+Start Producer:
+--------------------------
+bin/kafka-console-producer.sh --topic demotest --bootstrap-server 'instance_id' 
+
+Start Consumer:
+-------------------------
+Duplicate the session & enter in a new console --
+cd kafka_2.12-3.3.1
+bin/kafka-console-consumer.sh --topic demotest --bootstrap-server 'Instance_id'
+
